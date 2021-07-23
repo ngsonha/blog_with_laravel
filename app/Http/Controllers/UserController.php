@@ -24,6 +24,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
+
         $posts = Posts::UserAllPost($user->id)->orderBy('created_at', 'desc')->paginate(5);
         $title = $user->name;
         return view('home')->withPosts($posts)->withTitle($title);
@@ -53,6 +54,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
+
         $posts = Posts::UserPost1($id)->orderBy('created_at', 'desc')->paginate(5);
         $title = User::find($id)->name;
         return view('home')->withPosts($posts)->withTitle($title);
@@ -76,5 +78,6 @@ class UserController extends Controller
       $data['latest_posts'] = $data['user']->posts->where('active', 1)->take(5);
       return view('admin.profile', $data);
     }
+
     
 }

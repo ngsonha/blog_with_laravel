@@ -10,6 +10,7 @@
         'deleted'=>'Post deleted Successfully',
         'total'=>'Total posts',
         'pl'=>'Published Posts'
+
     ];
 
 
