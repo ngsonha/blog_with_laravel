@@ -9,6 +9,7 @@ use App\Enums\UserRole;
 class User extends Authenticatable
 {
 
+
    // use Authenticatable, CanResetPassword;
 
   /**
@@ -53,11 +54,15 @@ class User extends Authenticatable
     return false;
   }
 
-  public function scopeUserAllPost($query,$userid){
-    return $query->where('author_id', $userid)->where('active', '1');
+  public function is_admin()
+  {
+    $role = $this->role;
+    if ($role == UserRole::admin) {
+      return true;
+    }
+    return false;
   }
-  public function scopeUserPost($query,$userid){
-    return $query->where('author_id', $userid)->where('active', '0');
-  }
+
+  
 
 }

@@ -15,8 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'PostController@index');
 Route::get('/home', ['as' => 'home', 'uses' => 'PostController@index']);
-
-
 Route::get('/logout', 'UserController@logout');
 Route::group(['prefix' => 'auth'], function () {
   Auth::routes();
@@ -33,12 +31,13 @@ Route::middleware(['auth'])->group(function () {
   Route::post('update', 'PostController@update');
  
   Route::get('delete/{id}', 'PostController@destroy');
-  // display user's all posts
+ 
   Route::get('my-all-posts', 'UserController@index');
-  // display user's drafts
+ 
   Route::get('my-drafts', 'UserController@store');
  
 });
+Route::get('user/{id}', 'UserController@profile')->where('id', '[0-9]+');
+Route::get('user/{id}/posts', 'UserController@show')->where('id', '[0-9]+');
+Route::get('/{slug}', ['as' => 'post', 'uses' => 'PostController@show'])->where('slug', '[A-Za-z0-9-_]+');
 
-
- Route::get('/{slug}', ['as' => 'post', 'uses' => 'PostController@show'])->where('slug', '[A-Za-z0-9-_]+');

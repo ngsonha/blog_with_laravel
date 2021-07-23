@@ -8,7 +8,9 @@
         'saved' =>'Post saved successfully',
         'published'=>'Post published successfully',
         'deleted'=>'Post deleted Successfully',
-        
+        'total'=>'Total posts',
+        'pl'=>'Published Posts'
+
     ];
 
 

@@ -19,5 +19,15 @@ class Posts extends Model
   public function scopeGetPost($query,$sl){
     return $query->where('slug', $sl);
   }
-  
+
+  public function scopeUserAllPost($query,$userid){
+    return $query->where('author_id',$userid);
+  }
+  public function scopeUserPost0($query,$userid){
+    return $query->where('author_id', $userid)->where('active', '0');
+  }
+  public function scopeUserPost1($query,$userid){
+    return $query->where('author_id', $userid)->where('active', '1');
+  }
+
 }

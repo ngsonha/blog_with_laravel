@@ -24,20 +24,13 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        $posts = User::UserAllPost($user->id)->get();
+
+        $posts = Posts::UserAllPost($user->id)->orderBy('created_at', 'desc')->paginate(5);
         $title = $user->name;
         return view('home')->withPosts($posts)->withTitle($title);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -48,7 +41,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = $request->user();
-        $posts = Posts::UserPost($user->id)->orderBy('created_at', 'desc')->paginate(5);
+        $posts = Posts::UserPost0($user->id)->orderBy('created_at', 'desc')->paginate(5);
         $title = $user->name;
         return view('home')->withPosts($posts)->withTitle($title);
     }
@@ -61,43 +54,29 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $posts = Posts::UserAllPost($id)->orderBy('created_at', 'desc')->paginate(5);
+
+        $posts = Posts::UserPost1($id)->orderBy('created_at', 'desc')->paginate(5);
         $title = User::find($id)->name;
         return view('home')->withPosts($posts)->withTitle($title);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    
+    public function profile(Request $request, $id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+      $data['user'] = User::find($id);
+      if (!$data['user'])
+        return redirect('/');
+  
+      if ($request->user() && $data['user']->id == $request->user()->id) {
+        $data['author'] = true;
+      } else {
+        $data['author'] = null;
+      }
+      
+      $data['posts_count'] = $data['user']->posts->count();
+      $data['posts_active_count'] = $data['user']->posts->where('active', 1)->count();
+      $data['posts_draft_count'] = $data['posts_count'] - $data['posts_active_count'];
+      $data['latest_posts'] = $data['user']->posts->where('active', 1)->take(5);
+      return view('admin.profile', $data);
     }
 
     
