@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use App\Enums\UserRole;
 class User extends Authenticatable
 {
+
    // use Authenticatable, CanResetPassword;
 
   /**
@@ -58,4 +59,5 @@ class User extends Authenticatable
   public function scopeUserPost($query,$userid){
     return $query->where('author_id', $userid)->where('active', '0');
   }
+
 }
