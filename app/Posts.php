@@ -30,4 +30,10 @@ class Posts extends Model
     return $query->where('author_id', $userid)->where('active', '1');
   }
 
+  public function comments()
+  {
+    return $this->hasMany('App\Comments', 'on_post');
+  }
+
+
 }

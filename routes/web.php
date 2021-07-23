@@ -35,7 +35,9 @@ Route::middleware(['auth'])->group(function () {
   Route::get('my-all-posts', 'UserController@index');
  
   Route::get('my-drafts', 'UserController@store');
- 
+  
+  Route::post('comment/add', 'CommentController@store');
+  Route::get('comment/delete/{id}', 'CommentController@destroy');
 });
 Route::get('user/{id}', 'UserController@profile')->where('id', '[0-9]+');
 Route::get('user/{id}/posts', 'UserController@show')->where('id', '[0-9]+');

@@ -24,7 +24,6 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-
         $posts = Posts::UserAllPost($user->id)->orderBy('created_at', 'desc')->paginate(5);
         $title = $user->name;
         return view('home')->withPosts($posts)->withTitle($title);
@@ -71,7 +70,8 @@ class UserController extends Controller
       } else {
         $data['author'] = null;
       }
-      
+
+      $data['comments_count'] = $data['user']->comments->count();
       $data['posts_count'] = $data['user']->posts->count();
       $data['posts_active_count'] = $data['user']->posts->where('active', 1)->count();
       $data['posts_draft_count'] = $data['posts_count'] - $data['posts_active_count'];

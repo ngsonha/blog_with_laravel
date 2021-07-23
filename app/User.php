@@ -9,7 +9,6 @@ use App\Enums\UserRole;
 class User extends Authenticatable
 {
 
-
    // use Authenticatable, CanResetPassword;
 
   /**
@@ -62,7 +61,5 @@ class User extends Authenticatable
     }
     return false;
   }
-
-  
 
 }

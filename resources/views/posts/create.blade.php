@@ -12,7 +12,6 @@ Add New Post
   });
 </script>
 
-
 <form action="/new-post" method="post">
   <input type="hidden" name="_token" value="{{ csrf_token() }}">
   <div class="form-group">
