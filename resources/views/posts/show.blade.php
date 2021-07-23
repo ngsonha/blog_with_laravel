@@ -2,9 +2,12 @@
 @section('title')
 @if($post)
 {{ $post->title }}
+
 <?php 
 checkuser($post);
 ?>
+
+
 @else
 Page does not exist
 @endif
@@ -17,6 +20,7 @@ Page does not exist
 <div>
   {!! $post->body !!}
 </div>
+
 <div>
   <h2>Leave a comment</h2>
 </div>
@@ -60,6 +64,7 @@ Page does not exist
   </ul>
   @endif
 </div>
+
 @else
 404 error
 @endif

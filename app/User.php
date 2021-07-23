@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use App\Enums\UserRole;
 class User extends Authenticatable
 {
+
    // use Authenticatable, CanResetPassword;
 
   /**
@@ -51,6 +52,7 @@ class User extends Authenticatable
     }
     return false;
   }
+
   public function is_admin()
   {
     $role = $this->role;
@@ -60,5 +62,4 @@ class User extends Authenticatable
     return false;
   }
 
-  
 }

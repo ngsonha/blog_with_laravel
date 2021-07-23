@@ -79,6 +79,7 @@ class PostController extends Controller
   {
     $post = Posts::GetPost($slug)->first();
 
+
     if ($post) {
       if ($post->active == false)
         return redirect('/')->withErrors('requested page not found');
@@ -87,6 +88,7 @@ class PostController extends Controller
       return redirect('/')->withErrors('requested page not found');
     }
     return view('posts.show')->withPost($post)->withComments($comments);
+
   }
 
   /**

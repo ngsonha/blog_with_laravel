@@ -38,9 +38,11 @@
         </tr>
       </table>
     </li>
+
     <li class="list-group-item">
       Total Comments {{$comments_count}}
     </li>
+
   </ul>
 </div>
 <div class="panel panel-default">
@@ -60,6 +62,7 @@
     @endif
   </div>
 </div>
+
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3>Latest Comments</h3>
@@ -80,4 +83,5 @@
     @endif
   </div>
 </div>
+
 @endsection

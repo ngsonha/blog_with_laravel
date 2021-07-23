@@ -13,13 +13,13 @@ class Posts extends Model
     return $this->belongsTo('App\User', 'author_id');
   }
 
-
   public function scopeGetAllPost($query){
     return $query->where('active', '1');
   }
   public function scopeGetPost($query,$sl){
     return $query->where('slug', $sl);
   }
+
   public function scopeUserAllPost($query,$userid){
     return $query->where('author_id',$userid);
   }
@@ -34,5 +34,6 @@ class Posts extends Model
   {
     return $this->hasMany('App\Comments', 'on_post');
   }
+
 
 }
